@@ -218,6 +218,60 @@ def predict():
         print("Prediction Error:", str(e))
         return jsonify({"error": str(e)}), 500
 
+
+
+# @app.route("/predict", methods=["POST"])
+# def predict_batch():
+#     try:
+#         data = request.json
+#         user_id = data.get("user_id")
+#         rows = data.get("rows", [])
+
+#         if not user_id:
+#             return jsonify({"error": "user_id required"}), 400
+
+#         results = []
+
+#         for row in rows:
+#             module_id = row.get("moduleId", "unknown")
+
+#             required_features = [
+#                 "loc","vg","evg","lOCode","lOComment","lOBlank",
+#                 "locCodeAndComment","uniqOp","uniqOpnd",
+#                 "totalOp","totalOpnd","branchCount"
+#             ]
+
+#             feature_values = []
+#             for f in required_features:
+#                 val = float(row.get(f, 0))
+#                 feature_values.append(val)
+
+#             X = np.array([feature_values])
+
+#             prediction = model.predict(X)[0]
+#             label = "Defective" if int(prediction) == 1 else "Non-Defective"
+
+#             history = PredictionHistory(
+#                 user_id=user_id,
+#                 module_name=module_id,
+#                 result=label,
+#                 created_at=datetime.utcnow()
+#             )
+
+#             db.session.add(history)
+
+#             results.append({
+#                 "id": module_id,
+#                 "label": label
+#             })
+
+#         db.session.commit()
+
+#         return jsonify(results)
+
+#     except Exception as e:
+#         return jsonify({"error": str(e)}), 500
+    
 # =============================
 # LOGIN HISTORY
 # =============================

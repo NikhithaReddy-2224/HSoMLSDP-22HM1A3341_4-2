@@ -26,9 +26,9 @@ const Analytics = () => {
 
   // Model comparison data
   const modelComparison = [
-    { model: 'XGBoost', accuracy: 83.2 },
-    { model: 'MLP', accuracy: 81.5 },
-    { model: 'Stacking', accuracy: 82.8 },
+    { model: 'XGBoost', accuracy: 83.9 },
+    { model: 'MLP', accuracy: 86.3 },
+    { model: 'Stacking', accuracy: 84.8 },
   ];
 
   // Confusion matrix data (example for latest prediction)
@@ -64,11 +64,11 @@ const Analytics = () => {
 
             <Button
               variant="outline"
-              onClick={() => navigate("/notebook")}
+              onClick={() => navigate("/tracker")}
               className="border-border hover:bg-secondary"
             >
               <BookOpen className="w-4 h-4 mr-2" />
-              Notebook
+              Tracker
             </Button>
 
             <Button
@@ -118,7 +118,7 @@ const Analytics = () => {
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={modelComparison} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis type="number" domain={[85, 100]} />
+              <XAxis type="number" domain={[75, 90]} />
               <YAxis dataKey="model" type="category" />
               <Tooltip />
               <Legend />

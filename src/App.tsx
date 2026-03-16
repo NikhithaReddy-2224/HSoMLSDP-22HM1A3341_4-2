@@ -8,8 +8,9 @@ import Welcome from "./pages/Welcome";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import Selection from "./pages/Selection";
+import Datasets from "./pages/Datasets";
 import Dashboard from "./pages/Dashboard";
-import Notebook from "./pages/Notebook";
+import Tracker from "./pages/Tracker";
 import About from "./pages/About";
 import Analytics from "./pages/Analytics";
 import NotFound from "./pages/NotFound";
@@ -32,8 +33,9 @@ const App = () => (
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/selection" element={<Selection />} />
+            <Route path="/datasets" element={<Datasets />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/notebook" element={<Notebook />} />
+            <Route path="/tracker" element={<Tracker />} />
             <Route path="/about" element={<About />} />
             <Route path="/analytics" element={<Analytics />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

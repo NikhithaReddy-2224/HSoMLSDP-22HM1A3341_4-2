@@ -56,6 +56,24 @@ const Selection = () => {
 
         <div className="grid md:grid-cols-2 gap-10">
 
+          {/* NASA Dataset Card */}
+          <Card
+            onClick={() => navigate("/datasets")}
+            className="cursor-pointer p-10 text-center hover:scale-105 transition"
+          >
+
+            <Download className="w-16 h-16 mx-auto text-primary mb-4" />
+
+            <h2 className="text-2xl font-bold mb-2">
+              NASA MDP Datasets
+            </h2>
+
+            <p className="text-muted-foreground">
+              Click to view and download NASA MDP datasets
+            </p>
+
+          </Card>
+
           {/* Prediction Card */}
           <Card
             onClick={() => navigate("/dashboard")}
@@ -74,67 +92,6 @@ const Selection = () => {
 
           </Card>
 
-
-          {/* NASA Dataset Card */}
-          <Card className="p-10 text-center">
-
-            <Download className="w-16 h-16 mx-auto text-primary mb-4" />
-
-            <h2 className="text-2xl font-bold mb-2">
-              NASA MDP Datasets
-            </h2>
-
-            <p className="text-muted-foreground mb-6">
-              Download NASA MDP datasets for defect prediction
-            </p>
-
-            {/* Dataset Buttons */}
-            <div className="grid grid-cols-3 gap-3 justify-items-center">
-
-              <button
-                onClick={() => downloadDataset("kc1.csv")}
-                className="flex items-center gap-2 bg-secondary px-4 py-2 rounded-lg hover:bg-secondary/80"
-              >
-                <Download size={16} />
-                KC1
-              </button>
-
-              <button
-                onClick={() => downloadDataset("cm1.csv")}
-                className="flex items-center gap-2 bg-secondary px-4 py-2 rounded-lg hover:bg-secondary/80"
-              >
-                <Download size={16} />
-                CM1
-              </button>
-
-              <button
-                onClick={() => downloadDataset("jm1.csv")}
-                className="flex items-center gap-2 bg-secondary px-4 py-2 rounded-lg hover:bg-secondary/80"
-              >
-                <Download size={16} />
-                JM1
-              </button>
-
-              <button
-                onClick={() => downloadDataset("pc1.csv")}
-                className="flex items-center gap-2 bg-secondary px-4 py-2 rounded-lg hover:bg-secondary/80"
-              >
-                <Download size={16} />
-                PC1
-              </button>
-
-              <button
-                onClick={() => downloadDataset("kc2.csv")}
-                className="flex items-center gap-2 bg-secondary px-4 py-2 rounded-lg hover:bg-secondary/80"
-              >
-                <Download size={16} />
-                KC2
-              </button>
-
-            </div>
-
-          </Card>
-
         </div>
 
       </div>
@@ -144,4 +101,3 @@ const Selection = () => {
 };
 
 export default Selection;
-

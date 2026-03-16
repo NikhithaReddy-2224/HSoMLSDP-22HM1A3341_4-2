@@ -37,11 +37,11 @@ const About = () => {
 
             <Button
               variant="outline"
-              onClick={() => navigate("/notebook")}
+              onClick={() => navigate("/tracker")}
               className="border-border hover:bg-secondary"
             >
               <BookOpen className="w-4 h-4 mr-2" />
-              Notebook
+              Tracker
             </Button>
 
             <Button

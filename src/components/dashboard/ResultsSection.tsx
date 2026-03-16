@@ -20,14 +20,20 @@ const ResultsSection = ({ results }: ResultsSectionProps) => {
             <tr className="border-b border-border">
               <th className="text-left py-3 px-4">Module ID</th>
               <th className="text-left py-3 px-4">Prediction</th>
-              <th className="text-left py-3 px-4">Probability</th>
               <th className="text-left py-3 px-4">Status</th>
             </tr>
           </thead>
+
           <tbody>
             {results.map((result) => (
               <tr key={result.id} className="border-b border-border/50">
-                <td className="py-3 px-4">{result.id}</td>
+
+                {/* Module ID */}
+                <td className="py-3 px-4">
+                  {result.id}
+                </td>
+
+                {/* Prediction */}
                 <td className="py-3 px-4">
                   <Badge
                     variant={result.label === "Defective" ? "destructive" : "default"}
@@ -40,26 +46,16 @@ const ResultsSection = ({ results }: ResultsSectionProps) => {
                     {result.label}
                   </Badge>
                 </td>
-                <td className="py-3 px-4">
-                  <div className="flex items-center gap-2">
-                    <div className="flex-1 bg-secondary rounded-full h-2 max-w-[100px]">
-                      <div
-                        className="bg-primary h-2 rounded-full transition-all"
-                        style={{ width: `${result.probability * 100}%` }}
-                      />
-                    </div>
-                    <span className="text-sm">
-                      {(result.probability * 100).toFixed(1)}%
-                    </span>
-                  </div>
-                </td>
+
+                {/* Status */}
                 <td className="py-3 px-4">
                   {result.label === "Defective" ? (
-                    <XCircle className="w-5 h-5 text-destructive" />
+                    <XCircle className="w-5 h-5 text-red-500" />
                   ) : (
-                    <CheckCircle2 className="w-5 h-5 text-primary" />
+                    <CheckCircle2 className="w-5 h-5 text-cyan-400" />
                   )}
                 </td>
+
               </tr>
             ))}
           </tbody>
@@ -69,14 +65,20 @@ const ResultsSection = ({ results }: ResultsSectionProps) => {
       {/* Feature Importance (LIME) */}
       {results[0]?.features && (
         <Card className="p-6 bg-card border-border">
-          <h3 className="text-xl font-semibold mb-4">Feature Importance (LIME)</h3>
+          <h3 className="text-xl font-semibold mb-4">
+            Feature Importance (LIME)
+          </h3>
+
           <div className="space-y-3">
             {Object.entries(results[0].features).map(([feature, value]) => (
               <div key={feature}>
                 <div className="flex justify-between mb-1">
                   <span className="text-sm">{feature}</span>
-                  <span className="text-sm text-muted-foreground">{value}</span>
+                  <span className="text-sm text-muted-foreground">
+                    {value}
+                  </span>
                 </div>
+
                 <div className="bg-secondary rounded-full h-2">
                   <div
                     className="bg-primary h-2 rounded-full transition-all"
@@ -91,6 +93,7 @@ const ResultsSection = ({ results }: ResultsSectionProps) => {
 
       {/* Performance Charts */}
       <PerformanceCharts results={results} />
+
     </div>
   );
 };
