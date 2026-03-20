@@ -9,7 +9,12 @@ from lime.lime_tabular import LimeTabularExplainer
 from datetime import datetime
 
 app = Flask(__name__)
-CORS(app)
+# CORS(app)   modified this to below
+
+CORS(app, origins=[
+    "http://localhost:5173",  # for local dev
+    "https://hsomlsdp22hm1a3341.vercel.app"  # for production
+])
 
 # =============================
 # DATABASE CONFIG
