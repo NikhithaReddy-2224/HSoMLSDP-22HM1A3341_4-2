@@ -24,8 +24,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  // const BASE_URL = "http://localhost:5000"; // ✅ changed to localhost
-  const BASE_URL = "https://hsomlsdp-22hm1a33414-2-production.up.railway.app";
+  const BASE_URL = "http://localhost:5000"; // ✅ changed to localhost
+  
 
   // =============================
   // SIGN UP
