@@ -335,7 +335,6 @@
 #     )
 
 
-
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from database import db
@@ -350,20 +349,12 @@ app = Flask(__name__)
 CORS(app)
 
 # =============================
-# DATABASE CONFIG (RAILWAY FIX)
+# DATABASE CONFIG (IMPORTANT 🔥)
 # =============================
-uri = os.getenv("DATABASE_URL")
-
-if uri and uri.startswith("postgres://"):
-    uri = uri.replace("postgres://", "postgresql://", 1)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = uri
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
-
-with app.app_context():
-    db.create_all()
 
 # =============================
 # MODEL CONFIG
@@ -397,23 +388,14 @@ def load_model():
         print("Model not found")
 
 
-# 👉 LOAD MODEL ON START
+# 👉 IMPORTANT: Railway kosam ikkade call cheyyali
 load_model()
 
 # =============================
-# HEALTH CHECK
+# CREATE TABLES
 # =============================
-@app.route("/")
-def home():
-    return "Backend running successfully 🚀"
-
-
-@app.route("/health", methods=["GET"])
-def health():
-    return jsonify({
-        "status": "healthy",
-        "model_loaded": model is not None
-    })
+with app.app_context():
+    db.create_all()
 
 
 # =============================
@@ -430,12 +412,7 @@ def signup():
         if User.query.filter_by(email=email).first():
             return jsonify({"message": "User already exists"}), 400
 
-        new_user = User(
-            name=name,
-            email=email,
-            password=password
-        )
-
+        new_user = User(name=name, email=email, password=password)
         db.session.add(new_user)
         db.session.commit()
 
@@ -461,11 +438,7 @@ def login():
         user = User.query.filter_by(email=email).first()
 
         if not user:
-            user = User(
-                name="Demo User",
-                email=email,
-                password=password
-            )
+            user = User(name="Demo User", email=email, password=password)
             db.session.add(user)
             db.session.commit()
 
@@ -485,6 +458,17 @@ def login():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+
+# =============================
+# HEALTH CHECK
+# =============================
+@app.route("/health", methods=["GET"])
+def health():
+    return jsonify({
+        "status": "healthy",
+        "model_loaded": model is not None
+    })
 
 
 # =============================
@@ -598,12 +582,7 @@ def get_prediction_history(user_id):
 
 
 # =============================
-# RUN SERVER
+# RUN LOCAL ONLY
 # =============================
 if __name__ == "__main__":
-    app.run(
-        host="0.0.0.0",
-        port=int(os.environ.get("PORT", 8080)),
-        debug=True
-    )
-
+    app.run(host="0.0.0.0", port=5000, debug=True)
