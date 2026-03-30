@@ -16,9 +16,8 @@ CORS(app)
 # =============================
 # DATABASE CONFIG
 # =============================
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:2224@localhost:5432/hsomlsdp_db'
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-SQLALCHEMY_DATABASE_URI = "sqlite:///database.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:2224@localhost:5432/hsomlsdp_db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
 
